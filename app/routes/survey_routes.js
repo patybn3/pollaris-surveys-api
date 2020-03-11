@@ -82,8 +82,6 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
   Survey.findById(req.params.id)
     .then(handle404)
     .then(survey => {
-      console.log(survey)
-      console.log(req)
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
       requireOwnership(req, survey)
