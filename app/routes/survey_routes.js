@@ -5,6 +5,7 @@ const passport = require('passport')
 
 // pull in Mongoose model for surveys
 const Survey = require('../models/survey')
+const Option = require('../models/option')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -71,6 +72,26 @@ router.post('/surveys', requireToken, (req, res, next) => {
     // can send an error message back to the client
     .catch(next)
 })
+
+// Create answer to the options
+router.post('/options/:surveyId', requireToken, (req, res, next) => {
+  // set owner of new option to be current user
+  req.body.response.owner = req.user.id
+  req.body.response.questionOwner = req.params.surveyId
+
+  Option.create(req.body.response)
+    // respond to successful `create` with status 201 and JSON of new "response"
+    .then(option => {
+      res.status(201).json({ option: option.toObject() })
+    })
+    .catch(next)
+})
+
+// router.get('/options/', (req, res, next) => {
+//   Option.find({ surveyRef: req.body.surveyRef })
+//     .then(handle404)
+//     .then(option => res.status(200).json({ option: option.toObject() }))
+// })
 
 // UPDATE
 // PATCH /surveys/5a7db6c74d55bc51bdf39793

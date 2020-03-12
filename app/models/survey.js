@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Option = require('./option')
+const optionSchema = Option.schema
 
 const surveySchema = new mongoose.Schema({
   name: {
@@ -13,7 +15,8 @@ const surveySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  }
+  },
+  options: [ optionSchema ]
 }, {
   timestamps: true
 })
