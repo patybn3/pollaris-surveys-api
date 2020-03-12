@@ -72,21 +72,6 @@ router.post('/surveys', requireToken, (req, res, next) => {
     // can send an error message back to the client
     .catch(next)
 })
-
-// Create answer to the options
-router.post('/options/:surveyId', requireToken, (req, res, next) => {
-  // set owner of new option to be current user
-  req.body.response.owner = req.user.id
-  req.body.response.surveyOwner = req.params.surveyId
-
-  Option.create(req.body.response)
-    // respond to successful `create` with status 201 and JSON of new "response"
-    .then(option => {
-      res.status(201).json({ option: option.toObject() })
-    })
-    .catch(next)
-})
-
 // router.get('/options/', (req, res, next) => {
 //   Option.find({ surveyRef: req.body.surveyRef })
 //     .then(handle404)
