@@ -77,7 +77,7 @@ router.post('/surveys', requireToken, (req, res, next) => {
 router.post('/options/:surveyId', requireToken, (req, res, next) => {
   // set owner of new option to be current user
   req.body.response.owner = req.user.id
-  req.body.response.questionOwner = req.params.surveyId
+  req.body.response.surveyOwner = req.params.surveyId
 
   Option.create(req.body.response)
     // respond to successful `create` with status 201 and JSON of new "response"
