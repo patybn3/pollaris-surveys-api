@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2b606ed0-0a86-429a-b39d-1a1ce517a991",
+		"_postman_id": "ba4b20d1-5ee2-47f8-bc07-d1b2bd405628",
 		"name": "survey",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -21,13 +21,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:4741/surveys",
+					"raw": "localhost:4741/surveys/",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
-						"surveys"
+						"surveys",
+						""
 					]
 				}
 			},
@@ -41,7 +42,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -57,7 +58,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"survey\": {\n  \"name\": \"Wonga Bonga surveyxxxxxx\",\n  \"description\": \"What is your favorite Wonga Bonga?\"\n  }\n }\n",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Hello\",\n\t\t\"description\": \"hello?\",\n\t\t\"options\": [{\"option\": \"a\" }, {\"option\": \"hello\"}, {\"option\": \"mike\"}]\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -85,7 +86,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -101,7 +102,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"survey\": {\n  \"name\": \"Ethan's boring survey?\",\n  \"description\": \"What is your most boring activity?\"\n  }\n }\n",
+					"raw": "{ \"survey\": {\n  \"name\": \"Ethan's boring survey?\",\n  \"description\": \"What is your most boring activity?\",\n\t\t\"options\": [{\"option\": \"changed\" }, {\"option\": \"updated\"}, {\"option\": \"duck\"}]\n  }\n }\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,14 +110,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/???<id>",
+					"raw": "localhost:4741/surveys/5e6a7e099c0fa905304aa444",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
 						"surveys",
-						"???<id>"
+						"5e6a7e099c0fa905304aa444"
 					]
 				}
 			},
@@ -130,7 +131,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -146,7 +147,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"survey\": {\n  \"name\": \"Ethan's boring survey?\",\n  \"description\": \"What is your most boring activity?\"\n  }\n }\n",
+					"raw": "\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -154,14 +155,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/???<id>",
+					"raw": "localhost:4741/surveys/???survey_id???",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
 						"surveys",
-						"???<id>"
+						"???survey_id???"
 					]
 				}
 			},
@@ -178,7 +179,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -202,14 +203,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/???<id>",
+					"raw": "localhost:4741/surveys/5e6a7e099c0fa905304aa444",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
 						"surveys",
-						"???<id>"
+						"5e6a7e099c0fa905304aa444"
 					]
 				}
 			},
