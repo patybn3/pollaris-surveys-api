@@ -110,14 +110,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/5e6a7e099c0fa905304aa444",
+					"raw": "localhost:4741/surveys/???survey_id???",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
 						"surveys",
-						"5e6a7e099c0fa905304aa444"
+						"???survey_id???"
 					]
 				}
 			},
@@ -203,14 +203,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/5e6a7e099c0fa905304aa444",
+					"raw": "localhost:4741/surveys/???survey_id???",
 					"host": [
 						"localhost"
 					],
 					"port": "4741",
 					"path": [
 						"surveys",
-						"5e6a7e099c0fa905304aa444"
+						"???survey_id???"
 					]
 				}
 			},
