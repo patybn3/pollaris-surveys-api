@@ -5,7 +5,7 @@ const optionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  numVotes: Number  
+  numVotes: Number
 })
 
 module.exports = mongoose.model('Option', optionSchema)
