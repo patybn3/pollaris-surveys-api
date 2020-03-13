@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token???",
+							"value": "???token_id???",
 							"type": "string"
 						}
 					]
@@ -42,7 +42,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token???",
+							"value": "???token_id???",
 							"type": "string"
 						}
 					]
@@ -58,7 +58,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn\",\n\t\t\"description\": \"hello?\",\n\t\t\"options\": [\n\t\t\t{\"option\": \"a\", \"numVotes\": 0 }, \n\t\t\t{\"option\": \"hello\", \"numVotes\": 0}, \n\t\t\t{\"option\": \"mike\", \"numVotes\": 0}\n\t\t\t]\n\t}\n}",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn 2\",\n\t\t\"description\": \"hello? 2\"\n\t},\n\t\"options\": [\n\t\t\"opt1 2\",\n\t\t\"opt2 2\",\n\t\t\"opt3 2\"\n\t\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -86,7 +86,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token???",
+							"value": "???token_id???",
 							"type": "string"
 						}
 					]
@@ -102,7 +102,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn updated\",\n\t\t\"description\": \"hello? updated\",\n\t\t\"options\": [\n\t\t\t{\"option\": \"a updated\", \"numVotes\": 1 }, \n\t\t\t{\"option\": \"hello updated\", \"numVotes\": 2}, \n\t\t\t{\"option\": \"mike updated\", \"numVotes\": 3},\n\t\t\t{\"option\": \"new update\", \"numVotes\": 0}\n\t\t\t]\n\t}\n}",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn 2 updated\",\n\t\t\"description\": \"hello? 2 updated\"\n\t},\n\t\"options\": [\n\t\t\"opt111 updatedddd\",\n\t\t\"opt222 updatedddd\",\n\t\t\"opt333 updatedddd\"\n\t\t]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -110,7 +110,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/???survey_id???",
+					"raw": "localhost:4741/surveys/5e6bb899fd82f3e753ea5449",
 					"host": [
 						"localhost"
 					],
@@ -185,7 +185,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token???",
+							"value": "???token_id???",
 							"type": "string"
 						}
 					]
@@ -209,7 +209,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/???survey_id???",
+					"raw": "localhost:4741/surveys/5e6bad01f50533cdefd55148",
 					"host": [
 						"localhost"
 					],
