@@ -13,7 +13,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token_id???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -42,7 +42,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token_id???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -86,7 +86,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token_id???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
@@ -110,7 +110,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4741/surveys/5e6bb899fd82f3e753ea5449",
+					"raw": "localhost:4741/surveys/???survey_id???",
 					"host": [
 						"localhost"
 					],
@@ -185,7 +185,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "???token_id???",
+							"value": "???token???",
 							"type": "string"
 						}
 					]
