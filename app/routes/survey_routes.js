@@ -56,13 +56,24 @@ router.get('/surveys/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+function appendOptionsToSurvey (survey, options) {
+  const arrayOfObjects = options.map(option => {
+    return {
+      option: option,
+      numVotes: 0
+    }
+  })
+  survey.options = arrayOfObjects
+}
 // CREATE
 // POST /surveys
 router.post('/surveys', requireToken, (req, res, next) => {
   // set owner of new survey to be current user
-  req.body.survey.owner = req.user.id
-
-  Survey.create(req.body.survey)
+  const survey = req.body.survey
+  survey.owner = req.user.id
+  const options = req.body.options
+  appendOptionsToSurvey(survey, options)
+  Survey.create(survey)
     // respond to succesful `create` with status 201 and JSON of new "survey"
     .then(survey => {
       res.status(201).json({ survey: survey.toObject() })
@@ -84,16 +95,19 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
   delete req.body.survey.owner
-
+  const surveyWithUpdatedValues = req.body.survey
   Survey.findById(req.params.id)
     .then(handle404)
-    .then(survey => {
+    .then(retrievedSurvey => {
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
-      requireOwnership(req, survey)
+      requireOwnership(req, retrievedSurvey)
 
+      req.body.owner = req.user.id
+      const options = req.body.options
+      appendOptionsToSurvey(surveyWithUpdatedValues, options)
       // pass the result of Mongoose's `.update` to the next `.then`
-      return survey.updateOne(req.body.survey)
+      return retrievedSurvey.updateOne(surveyWithUpdatedValues)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
