@@ -30,7 +30,6 @@ const router = express.Router()
 // INDEX
 // GET /surveys
 router.get('/surveys', (req, res, next) => {
-  console.log('all surveys')
   Survey.find()
     .then(surveys => {
       // `surveys` will be an array of Mongoose documents
@@ -45,9 +44,8 @@ router.get('/surveys', (req, res, next) => {
 })
 // GET all surveys from a specific user
 router.get('/surveys/mine', requireToken, (req, res, next) => {
-  console.log('nop')
-  const id = req.user._id
-  Survey.find({ owner: id })
+  const userId = req.user._id
+  Survey.find({ owner: userId })
     .then(surveys => {
       // `surveys` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
