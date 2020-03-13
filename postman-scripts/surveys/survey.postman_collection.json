@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "ba4b20d1-5ee2-47f8-bc07-d1b2bd405628",
+		"_postman_id": "78482e80-bb74-4b8c-a783-ce65f189f3bc",
 		"name": "survey",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "get",
+			"name": "index all surveys",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -58,7 +58,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Hello\",\n\t\t\"description\": \"hello?\",\n\t\t\"options\": [{\"option\": \"a\" }, {\"option\": \"hello\"}, {\"option\": \"mike\"}]\n\t}\n}",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn\",\n\t\t\"description\": \"hello?\",\n\t\t\"options\": [\n\t\t\t{\"option\": \"a\", \"numVotes\": 0 }, \n\t\t\t{\"option\": \"hello\", \"numVotes\": 0}, \n\t\t\t{\"option\": \"mike\", \"numVotes\": 0}\n\t\t\t]\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,7 +102,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"survey\": {\n  \"name\": \"Ethan's boring survey?\",\n  \"description\": \"What is your most boring activity?\",\n\t\t\"options\": [{\"option\": \"changed\" }, {\"option\": \"updated\"}, {\"option\": \"duck\"}]\n  }\n }\n",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn updated\",\n\t\t\"description\": \"hello? updated\",\n\t\t\"options\": [\n\t\t\t{\"option\": \"a updated\", \"numVotes\": 1 }, \n\t\t\t{\"option\": \"hello updated\", \"numVotes\": 2}, \n\t\t\t{\"option\": \"mike updated\", \"numVotes\": 3},\n\t\t\t{\"option\": \"new update\", \"numVotes\": 0}\n\t\t\t]\n\t}\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -162,7 +162,13 @@
 					"port": "4741",
 					"path": [
 						"surveys",
-						"???survey_id???"
+						""
+					],
+					"query": [
+						{
+							"key": "??survey_id???",
+							"value": null
+						}
 					]
 				}
 			},
