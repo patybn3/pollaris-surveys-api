@@ -5,7 +5,6 @@ const passport = require('passport')
 
 // pull in Mongoose model for surveys
 const Survey = require('../models/survey')
-const Option = require('../models/option')
 
 // this is a collection of methods that help us detect situations when we need
 // to throw a custom error
@@ -30,8 +29,25 @@ const router = express.Router()
 
 // INDEX
 // GET /surveys
-router.get('/surveys', requireToken, (req, res, next) => {
+router.get('/surveys', (req, res, next) => {
+  console.log('all surveys')
   Survey.find()
+    .then(surveys => {
+      // `surveys` will be an array of Mongoose documents
+      // we want to convert each one to a POJO, so we use `.map` to
+      // apply `.toObject` to each one
+      return surveys.map(survey => survey.toObject())
+    })
+    // respond with status 200 and JSON of the surveys
+    .then(surveys => res.status(200).json({ surveys: surveys }))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+// GET all surveys from a specific user
+router.get('/surveys/mine', requireToken, (req, res, next) => {
+  console.log('nop')
+  const id = req.user._id
+  Survey.find({ owner: id })
     .then(surveys => {
       // `surveys` will be an array of Mongoose documents
       // we want to convert each one to a POJO, so we use `.map` to
@@ -46,7 +62,7 @@ router.get('/surveys', requireToken, (req, res, next) => {
 
 // SHOW
 // GET /surveys/5a7db6c74d55bc51bdf39793
-router.get('/surveys/:id', requireToken, (req, res, next) => {
+router.get('/surveys/:id', (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Survey.findById(req.params.id)
     .then(handle404)
