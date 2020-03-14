@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "12f6647b-a81a-4db8-a3b3-08bc46ad4a10",
+		"name": "survey",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "index all surveys",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "637af727-bebd-48f5-b3dc-6cb66eab831f",
+						"exec": [
+							"// See notes for \"create\" Postman scriptconsole.log(\"Pre-request Script from Postman for GET:\")",
+							"console.log(\"token = \" + pm.environment.get(\"token\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7c228c68-4cf1-4ccb-9e76-8b3c9a724259",
+						"exec": [
+							"// See notes for \"create\" Postman script"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4741/surveys/",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"surveys",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f2899852-6f8b-41c9-b2f4-0500c01d9d22",
+						"exec": [
+							"/* THESE COMMENTS DOCUMENT HOW ALL THE surveys script work",
+							"General:",
+							"  - Select or create environment (upper right of Postman page).  Any environment except \"No environment\" works.",
+							"  - Header uses {{token}} which is defined in sign-in Postman script",
+							"",
+							"For any Postman script that needs the token, enter {{token}}",
+							"For any Postman scripts that need the id from the create script, enter {{survey_id}} at the end of the URL",
+							"",
+							"create script:",
+							" - defines environment variable \"survey_id\" to be used by other scripts in the \"Tests\" script on Tests tab",
+							"  - to see log of running Postman scripts, go to POSATMAN console: Command-Alt-c for Mac or Ctrl-Alt-c for Windows",
+							"",
+							"// under authorization in the token fieldconst ",
+							"*/",
+							"survey_id = JSON.parse(responseBody).survey._id",
+							"pm.environment.set(\"survey_id\", survey_id)",
+							"console.log(\"Tests script/post request complete from POSTMAN for: POST\")",
+							"console.log(\"Set survey_id to \" + pm.environment.get(\"survey_id\"))",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "88c6f45b-8872-405d-afe2-ff1f47e7fe1e",
+						"exec": [
+							"// See notes in \"Tests\" tab",
+							"console.log(\"Pre-request Script from Postman for POST:\")",
+							"console.log(\"Token = \"+pm.environment.get(\"token\"))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn 2\",\n\t\t\"description\": \"hello? 2\"\n\t},\n\t\"options\": [\n\t\t\"opt1 2\",\n\t\t\"opt2 2\",\n\t\t\"opt3 2\"\n\t\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/surveys",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"surveys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "01b70393-a17e-4721-a69c-711c31a9e5fa",
+						"exec": [
+							"// See notes for \"create\" Postman script",
+							"console.log(\"Pre-request Script from Postman for PATCH:\")",
+							"console.log(\"token = \" + pm.environment.get(\"token\"))",
+							"console.log(\"survey_id = \"+pm.environment.get(\"survey_id\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b525c9b-b27c-4ace-8401-d8807bed693e",
+						"exec": [
+							"// See notes for \"create\" Postman script"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"survey\": {\n\t\t\"name\": \"Fri morn 3 updated\",\n\t\t\"description\": \"hello? 2 updated\"\n\t},\n\t\"options\": [\n\t\t\"opt111 updatedddd\",\n\t\t\"opt222 updatedddd\",\n\t\t\"opt333 updatedddd\"\n\t\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/surveys/{{survey_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"surveys",
+						"{{survey_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "27697bed-6155-4e57-afbb-a293d1715bd4",
+						"exec": [
+							"// See notes for \"create\" Postman script",
+							"console.log(\"Pre-request Script from Postman for DEL:\")",
+							"console.log(\"token = \" + pm.environment.get(\"token\"))",
+							"console.log(\"survey_id = \"+pm.environment.get(\"survey_id\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a06113ad-0587-4c87-9a10-bea2a20f27ae",
+						"exec": [
+							"// See notes for \"create\" Postman script",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/surveys/{{survey_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"surveys",
+						"{{survey_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c800ef4-e227-4610-87a1-86b868f456c5",
+						"exec": [
+							"// See notes for \"create\" Postman script",
+							"console.log(\"Pre-request Script from Postman for GET:\")",
+							"console.log(\"token = \" + pm.environment.get(\"token\"))",
+							"console.log(\"survey_id = \"+pm.environment.get(\"survey_id\"))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "acac133f-6bc2-497b-b10a-f9e75485fa1a",
+						"exec": [
+							"// See notes for \"create\" Postman script",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/surveys/{{survey_id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"surveys",
+						"{{survey_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
