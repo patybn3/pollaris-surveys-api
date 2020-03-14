@@ -135,14 +135,15 @@ router.patch('/surveys/vote/:id', (req, res, next) => {
   const newVote = req.body.vote
   Survey.findById(req.params.id)
     .then(handle404)
-    .then(survey => {
-      console.log(survey.options[0])
-      console.log('num votes for this option b4 inc', survey.options[newVote].numVotes)
-      survey.options[newVote].numVotes++
-      console.log('num votes for this option after inc', survey.options[newVote].numVotes)
-      appendOptionsToSurvey(survey, survey.options)
+    .then(retrievedSurvey => {
+      console.log(retrievedSurvey.options[0])
+      console.log('num votes for this option b4 inc', retrievedSurvey.options[newVote].numVotes)
+      retrievedSurvey.options[newVote].numVotes++
+      console.log('num votes for this option after inc', retrievedSurvey.options[newVote].numVotes)
+      // appendOptionsToSurvey(retrievedSurvey, retrievedSurvey.options)
       // pass the result of Mongoose's `.update` to the next `.then`
-      return survey.updateOne(survey)
+      // console.log(retrievedSurvey.options[newVote].numVotes)
+      return retrievedSurvey.updateOne(retrievedSurvey)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
