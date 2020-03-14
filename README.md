@@ -15,8 +15,6 @@
 ## Manual Testing
 - From Browser, enter http://localhost:4741/examples to see if its working, it should say unauthorized.
 - Postman scripts are located in postman-scripts directory.
-  - You will need to sign up, sign in, and copy the token from sign in
-  - Set Bearer token in AUTHORIZATION for GET, SHOW, DELETE, CREATE, and UPDATE
-  - Create a record
-  - Note ID in body
-  - Change URL id that comes after / in SHOW and DELETE
+  - Create or select an existing environment (anything except no environment)
+  - Scripts that require authorization use the token defined at sign in
+  - Scripts that require a survey id (SHOW, DEELETE, UPDATE) use the survey_id for last object created by CREATE script.  To customize to use a specific survey_id, change {{survey_id}} in the URL to the desired survey_id.
