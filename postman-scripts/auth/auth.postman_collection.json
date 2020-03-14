@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "2b2f08f2-2792-4cf3-a797-8a10544fdc14",
+		"name": "auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sign-up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"credentials\": {\n\"email\": \"a@a\",\n\"password\": \"a\",\n\"password_confirmation\": \"a\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/sign-up",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign-in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b62dc14f-ed81-4a0e-bd5b-508351d626ef",
+						"exec": [
+							"// How to use:",
+							"//  - Select or create an environment (upper right of Postman)",
+							"//  - Send request",
+							"//  - If you want to see value of token or troubleshoot, ",
+							"//    go to console (PC: Command-Alt-c or Ctrl-Alt-c)",
+							"// For any Postman script that needs the token, enter {{token}}",
+							"// under authorization in the token field",
+							"const token = JSON.parse(responseBody).user.token",
+							"pm.environment.set(\"token\", token)",
+							"console.log(\"Tests script/post request complete from POSTMAN for: POST\")",
+							"console.log(\"Set token to \" + token)",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"credentials\": {\n\"email\": \"a@a\",\n\"password\": \"a\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4741/sign-in",
+					"host": [
+						"localhost"
+					],
+					"port": "4741",
+					"path": [
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
