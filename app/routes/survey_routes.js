@@ -129,6 +129,27 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
     .catch(next)
 })
 
+// UPDATE a survey with a vote
+// PATCH /surveys/vote/5a7db6c74d55bc51bdf39793
+router.patch('/surveys/vote/:id', (req, res, next) => {
+  const newVote = req.body.vote
+  Survey.findById(req.params.id)
+    .then(handle404)
+    .then(survey => {
+      console.log(survey.options[0])
+      console.log('num votes for this option b4 inc', survey.options[newVote].numVotes)
+      survey.options[newVote].numVotes++
+      console.log('num votes for this option after inc', survey.options[newVote].numVotes)
+      appendOptionsToSurvey(survey, survey.options)
+      // pass the result of Mongoose's `.update` to the next `.then`
+      return survey.updateOne(survey)
+    })
+    // if that succeeded, return 204 and no JSON
+    .then(() => res.sendStatus(204))
+    // if an error occurs, pass it to the handler
+    .catch(next)
+})
+
 // DESTROY
 // DELETE /surveys/5a7db6c74d55bc51bdf39793
 router.delete('/surveys/:id', requireToken, (req, res, next) => {
