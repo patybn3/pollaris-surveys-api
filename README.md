@@ -9,7 +9,7 @@ Pollaris Surveys is Full Stack Web Application developed as a group project by t
 
 The Front-End repository of this app is stored at [Pollaris Surveys Client - Front-End](https://github.com/wat-the-duck/pollaris-surveys-client/tree/development).
 And its version was deployd to [Heroku](https://mighty-retreat-69793.herokuapp.com/surveys).
-This application can be viewd and tested [HERE](https://wat-the-duck.github.io/pollaris-surveys-client/)
+This application can be viewed and tested [HERE](https://wat-the-duck.github.io/pollaris-surveys-client/)
 
 ## Objectives:
 
@@ -30,7 +30,7 @@ To create a fully functional application that allows an authenticated user to cr
 - `git push heroku master`
 - `heroku addons:create mongolab:sandbox`
 - The first time you create a mongolab sandbox you might get the following message:
-  - `Creating mongolab:sandbox on ⬢ pacific-cliffs-91276... !
+  - `Creating mongolab:sandbox on ⬢ pacific-cliffs-91... !
  ▸    Please verify your account to install this add-on plan (please enter a credit card) For more information, see
  ▸    https://devcenter.heroku.com/categories/billing Verify now at https://heroku.com/verify`
 - Make sure to copy the link and paste it on your preferred browser following the instructions to continue. Once this step is completed the message will update to something like this:
@@ -86,7 +86,7 @@ Refer to the front-end of this application mentioned above for the list of techn
 ## Planning
 
 1. One person:
-  - [X] Download api template and push
+  - [X] Download API template and push
   - [X] Deploy to heroku
   - [X] Download UI template and push
   - [X] Deploy to heroku
