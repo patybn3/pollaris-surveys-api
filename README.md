@@ -20,7 +20,8 @@ To create a fully functional application that allows an authenticated user to cr
 - [API template](https://git.generalassemb.ly/ga-wdi-boston/express-api-template)
 
 
-## Set Up (on master branch)
+## Set Up
+### (on master branch)
 
 - `npm install`
 - `npm install -g nodemon`
@@ -62,14 +63,14 @@ Use heroku addons:docs mongolab to view documentation`
 
 ## Technology Used:
 
-1.MongoDB NoSQL.
-2.Express.js.
-3.Mongoose.
-4.GitHub.
-5.Git.
-6.Heroku.
-7.JavaScript.
-8.Node.js:
+1. MongoDB NoSQL.
+2. Express.js.
+3. Mongoose.
+4. GitHub.
+5. Git.
+6. Heroku.
+7. JavaScript.
+8. Node.js:
    1. Passport (for authentication).
    2. bcrypt (cryptography).
    3. CORS.
@@ -85,35 +86,35 @@ Refer to the front-end of this application mentioned above for the list of techn
 ## Planning
 
 1. One person:
-  [X] Download api template and push
-  [X] Deploy to heroku
-  [X] Download UI template and push
-  [X] Deploy to heroku
-[X] API Sign up, sign in
-[X] UI Sign up, sign in
+  - [X] Download api template and push
+  - [X] Deploy to heroku
+  - [X] Download UI template and push
+  - [X] Deploy to heroku
+- [X] API Sign up, sign in
+- [X] UI Sign up, sign in
 2. Each team member
-  [X] Clones repos
-[X] Survey API CRUD for resource with no options
-[X] Survey UI CRUD for resource with no options
-[X] Survey API CRUD for resource with options
+  - [X] Clones repos
+- [X] Survey API CRUD for resource with no options
+- [X] Survey UI CRUD for resource with no options
+- [X] Survey API CRUD for resource with options
 
 Work in three groups on UI.  When someone is ready to push to feature,
 then do the pull request as a group.  Then, everybody rebases and
 resolves any conflicts, also as a group.  Rebase will merge any changes.
 
 3.
-[X] Survey UI CRUD for resource with options
-    [X] CREATE
-        [X] Suggestion: Do a reset so can create a new item
-    [X] INDEX - List all surveys, my surveys
-    [X] SHOW/UPDATE of options
-    [X] DELETE
-[X] Take Survey
-    [X] API
-    [X] UI
-[X] UI - Handle errors
-[X] UI - Only appropriate buttons appear
-[X] Review checklist
+- [X] Survey UI CRUD for resource with options
+    - [X] CREATE
+        - [X] Suggestion: Do a reset so can create a new item
+    - [X] INDEX - List all surveys, my surveys
+    - [X] SHOW/UPDATE of options
+    - [X] DELETE
+- [X] Take Survey
+    - [X] API
+    - [X] UI
+- [X] UI - Handle errors
+- [X] UI - Only appropriate buttons appear
+- [X] Review checklist
 
 ## Unsolved Problems
 
