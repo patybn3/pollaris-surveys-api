@@ -71,12 +71,15 @@ router.get('/surveys/:id', (req, res, next) => {
 })
 
 function appendOptionsToSurvey (survey, options) {
-  const arrayOfObjects = options.map(option => {
+  const optionsWithoutBlanks = options.filter(option => option !== '')
+  console.log(optionsWithoutBlanks)
+  const arrayOfObjects = optionsWithoutBlanks.map(option => {
     return {
       option: option,
       numVotes: 0
     }
   })
+  console.log('Array of objects', arrayOfObjects)
   survey.options = arrayOfObjects
 }
 // CREATE
@@ -136,10 +139,7 @@ router.patch('/surveys/vote/:id', (req, res, next) => {
   Survey.findById(req.params.id)
     .then(handle404)
     .then(retrievedSurvey => {
-      console.log(retrievedSurvey.options[0])
-      console.log('num votes for this option b4 inc', retrievedSurvey.options[newVote].numVotes)
       retrievedSurvey.options[newVote].numVotes++
-      console.log('num votes for this option after inc', retrievedSurvey.options[newVote].numVotes)
       // appendOptionsToSurvey(retrievedSurvey, retrievedSurvey.options)
       // pass the result of Mongoose's `.update` to the next `.then`
       // console.log(retrievedSurvey.options[newVote].numVotes)
