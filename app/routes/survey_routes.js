@@ -71,7 +71,8 @@ router.get('/surveys/:id', (req, res, next) => {
 })
 
 function appendOptionsToSurvey (survey, options) {
-  const arrayOfObjects = options.map(option => {
+  const optionsWithoutBlanks = options.filter(option => option !== '')
+  const arrayOfObjects = optionsWithoutBlanks.map(option => {
     return {
       option: option,
       numVotes: 0
@@ -79,6 +80,7 @@ function appendOptionsToSurvey (survey, options) {
   })
   survey.options = arrayOfObjects
 }
+
 // CREATE
 // POST /surveys
 router.post('/surveys', requireToken, (req, res, next) => {
