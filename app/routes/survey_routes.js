@@ -105,13 +105,14 @@ router.post('/surveys', requireToken, (req, res, next) => {
 //     .then(option => res.status(200).json({ option: option.toObject() }))
 // })
 
-// UPDATE
+// UPDATE a survey
 // PATCH /surveys/5a7db6c74d55bc51bdf39793
 router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
   // if the client attempts to change the `owner` property by including a new
   // owner, prevent that by deleting that key/value pair
   delete req.body.survey.owner
-  const surveyWithUpdatedValues = req.body.survey
+  // did it actually delete the owner #TODO
+  const surveyWithUserEdits = req.body
   Survey.findById(req.params.id)
     .then(handle404)
     .then(retrievedSurvey => {
@@ -120,10 +121,24 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
       requireOwnership(req, retrievedSurvey)
 
       req.body.owner = req.user.id
-      const options = req.body.options
-      appendOptionsToSurvey(surveyWithUpdatedValues, options)
-      // pass the result of Mongoose's `.update` to the next `.then`
-      return retrievedSurvey.updateOne(surveyWithUpdatedValues)
+
+      // compare surveyWithUserEdits to retrievedSurvey and update any fields
+      // that need updating
+      if (surveyWithUserEdits.survey.name !== retrievedSurvey.name) {
+        retrievedSurvey.name = surveyWithUserEdits.survey.name
+      }
+      if (surveyWithUserEdits.survey.description !== retrievedSurvey.description) {
+        retrievedSurvey.description = surveyWithUserEdits.survey.description
+      }
+      for (let i = 0; i < 5; i++) {
+        if (surveyWithUserEdits.options[i].option !== retrievedSurvey.options[i].option) {
+          retrievedSurvey.options[i] = {
+            option: surveyWithUserEdits.options[i],
+            numVotes: retrievedSurvey.options[i].numVotes
+          }
+        }
+      }
+      return retrievedSurvey.updateOne(retrievedSurvey)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
@@ -134,14 +149,13 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
 // UPDATE a survey with a vote
 // PATCH /surveys/vote/5a7db6c74d55bc51bdf39793
 router.patch('/surveys/vote/:id', (req, res, next) => {
-  const newVote = req.body.vote
+  const newVoteIndex = req.body.vote
   Survey.findById(req.params.id)
     .then(handle404)
     .then(retrievedSurvey => {
-      retrievedSurvey.options[newVote].numVotes++
+      retrievedSurvey.options[newVoteIndex].numVotes++
       // appendOptionsToSurvey(retrievedSurvey, retrievedSurvey.options)
       // pass the result of Mongoose's `.update` to the next `.then`
-      // console.log(retrievedSurvey.options[newVote].numVotes)
       return retrievedSurvey.updateOne(retrievedSurvey)
     })
     // if that succeeded, return 204 and no JSON
