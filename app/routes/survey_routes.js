@@ -112,33 +112,36 @@ router.patch('/surveys/:id', requireToken, removeBlanks, (req, res, next) => {
   // owner, prevent that by deleting that key/value pair
   delete req.body.survey.owner
   // did it actually delete the owner #TODO
-  const surveyWithUserEdits = req.body
+  // newSurveyFromBody includes delimited list of options
+  const body = req.body
+  const bodyOptionStrings = req.body.options.filter(optionStr => optionStr !== '')
+  const newOptionObjects = bodyOptionStrings.map(optionStr => {
+    return {option: optionStr, numVotes: 0}
+  })
+  const newSurvey = {
+    name: body.survey.name,
+    description: body.survey.description,
+    options: newOptionObjects
+  }
+
   Survey.findById(req.params.id)
     .then(handle404)
-    .then(retrievedSurvey => {
+    .then(oldSurvey => {
       // pass the `req` object and the Mongoose record to `requireOwnership`
       // it will throw an error if the current user isn't the owner
-      requireOwnership(req, retrievedSurvey)
-
+      requireOwnership(req, oldSurvey)
       req.body.owner = req.user.id
 
-      // compare surveyWithUserEdits to retrievedSurvey and update any fields
-      // that need updating
-      if (surveyWithUserEdits.survey.name !== retrievedSurvey.name) {
-        retrievedSurvey.name = surveyWithUserEdits.survey.name
-      }
-      if (surveyWithUserEdits.survey.description !== retrievedSurvey.description) {
-        retrievedSurvey.description = surveyWithUserEdits.survey.description
-      }
-      for (let i = 0; i < 5; i++) {
-        if (surveyWithUserEdits.options[i].option !== retrievedSurvey.options[i].option) {
-          retrievedSurvey.options[i] = {
-            option: surveyWithUserEdits.options[i],
-            numVotes: retrievedSurvey.options[i].numVotes
+      // for any options in new survey that were also options in old survey,
+      // maintain the value
+      newSurvey.options.forEach(newOptionObject => {
+        oldSurvey.options.forEach(oldOptionObject => {
+          if (newOptionObject.option === oldOptionObject.option) {
+            newOptionObject.numVotes = oldOptionObject.numVotes
           }
-        }
-      }
-      return retrievedSurvey.updateOne(retrievedSurvey)
+        })
+      })
+      return oldSurvey.updateOne(newSurvey)
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
